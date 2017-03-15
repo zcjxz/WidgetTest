@@ -9,9 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class MyWidgetProvider extends AppWidgetProvider{
     String TAG="zcj";
+    SimpleDateFormat sdf;
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
@@ -33,13 +37,16 @@ public class MyWidgetProvider extends AppWidgetProvider{
     @Override
     public void onEnabled(Context context) {
         super.onEnabled(context);
+
         Log.i(TAG, "onEnabled: ");
+        context.startService(new Intent(context,ClockService.class));
     }
 
     @Override
     public void onDisabled(Context context) {
         super.onDisabled(context);
         Log.i(TAG, "onDisabled: ");
+        context.stopService(new Intent(context,ClockService.class));
     }
 
     @Override
@@ -47,10 +54,12 @@ public class MyWidgetProvider extends AppWidgetProvider{
         String action = intent.getAction();
         if (action.equals("zcj")){
             Log.i(TAG, "onReceive: ");
-            RemoteViews remoteViews=new RemoteViews(context.getPackageName(),R.layout.layout_widget);
-            remoteViews.setTextViewText(R.id.widget_text,"lksajdfk");
-            ComponentName componentName = new ComponentName(context, MyWidgetProvider.class);
-            AppWidgetManager.getInstance(context).updateAppWidget(componentName,remoteViews);
+//            sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String time = sdf.format(new Date());
+//            RemoteViews remoteViews=new RemoteViews(context.getPackageName(),R.layout.layout_widget);
+//            remoteViews.setTextViewText(R.id.widget_text,time);
+//            ComponentName componentName = new ComponentName(context, MyWidgetProvider.class);
+//            AppWidgetManager.getInstance(context).updateAppWidget(componentName,remoteViews);
         }
         super.onReceive(context, intent);
     }
