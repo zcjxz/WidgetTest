@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.guowei.weather.widgettest.utils.DrawUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -53,13 +55,14 @@ public class MyWidgetProvider extends AppWidgetProvider{
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action.equals("zcj")){
-            Log.i(TAG, "onReceive: ");
+            Log.i(TAG, "onReceive: zcj");
 //            sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            String time = sdf.format(new Date());
 //            RemoteViews remoteViews=new RemoteViews(context.getPackageName(),R.layout.layout_widget);
 //            remoteViews.setTextViewText(R.id.widget_text,time);
 //            ComponentName componentName = new ComponentName(context, MyWidgetProvider.class);
 //            AppWidgetManager.getInstance(context).updateAppWidget(componentName,remoteViews);
+            new DrawUtils().updateClock();
         }
         super.onReceive(context, intent);
     }

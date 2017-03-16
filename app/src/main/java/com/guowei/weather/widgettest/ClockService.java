@@ -9,6 +9,9 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.guowei.weather.widgettest.utils.DensityUtil;
+import com.guowei.weather.widgettest.utils.DrawUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
@@ -44,19 +47,22 @@ public class ClockService extends Service{
     }
 
     private void updateClock() {
-        String time = sdf.format(new Date());
-        RemoteViews remoteViews=new RemoteViews(getPackageName(),R.layout.layout_widget);
-        remoteViews.setTextViewText(R.id.widget_text,time);
-        AppWidgetManager widgetManager = AppWidgetManager.getInstance(getApplication());
-        widgetManager.updateAppWidget(new ComponentName(getApplication(),MyWidgetProvider.class),remoteViews);
-        Log.i("zcj", "updateClock: -------");
-//        this.sendBroadcast(new Intent("zcj"));
+//        String time = sdf.format(new Date());
+//        RemoteViews remoteViews=new RemoteViews(getPackageName(),R.layout.layout_widget);
+//        remoteViews.setTextViewText(R.id.widget_text,time);
+//        AppWidgetManager widgetManager = AppWidgetManager.getInstance(getApplication());
+//        widgetManager.updateAppWidget(new ComponentName(getApplication(),MyWidgetProvider.class),remoteViews);
+//        Log.i("zcj", "updateClock: -------");
+        this.sendBroadcast(new Intent("zcj"));
 //        Log.i("zcj", "updateClock");
+//        drawUtils.updateClock();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        timer.cancel();
         timer=null;
+        Log.i("zcj", "onDestroy: --------");
     }
 }
